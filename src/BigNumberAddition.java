@@ -13,7 +13,7 @@ public class BigNumberAddition {
     }
 
     public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        List list = new ArrayList();
+        List<Integer> list = new ArrayList();
         ListNode temp1 = l1;
         ListNode temp2 = l2;
         while (l1 != null || l2 != null) {
@@ -28,10 +28,23 @@ public class BigNumberAddition {
             list.add((a + b));
         }
         int last = 0;
-
+        temp1 = null;
         for (int i = list.size() - 1; i >= 0; i--) {
-
+            int a = list.get(i) + last;
+            if (a > 9) {
+                last = 1;
+                a = a - 10;
+            }
+            ListNode node = new ListNode(a);
+            if (temp1 == null) {
+                temp1 = node;
+            } else {
+                node.next = temp1;
+                temp1 = null;
+                temp1 = node;
+            }
         }
+        return temp1;
     }
 
 }
